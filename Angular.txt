@@ -1,0 +1,98 @@
+import {} from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `
+    <div class="container">
+      <div class="left-panel">
+        <h3>Pictures</h3>
+        <div class="image-container">
+          @for (image of images; track image) {
+          <img
+            [src]="image.url"
+            [alt]="image.name"
+            (click)="selectImage(image)"
+          />
+          }
+        </div>
+      </div>
+
+      @if (selectedImage) {
+      <div class="right-panel">
+        <div class="selected-image">
+          <h2>{{ selectedImage.name }}</h2>
+          <p>{{ selectedImage.description }}</p>
+          <img [src]="selectedImage.url" [alt]="selectedImage.name" />
+        </div>
+      </div>
+      }
+    </div>
+  `,
+  styles: [
+    `
+      .container {
+        display: flex;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+      }
+
+      .left-panel,
+      .right-panel {
+        width: 50%;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      .left-panel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .image-container {
+        display: flex;
+        gap: 10px;
+      }
+      .image-container img {
+        width: 100%;
+        max-width: 200px;
+        cursor: pointer;
+        margin-bottom: 10px;
+      }
+
+      .selected-image img {
+        width: 100%;
+        max-width: 300px;
+        margin: 15px;
+      }
+    `,
+  ],
+  imports:[],
+})
+export class AppComponent {
+  images = [
+    {
+      url: 'https://media.istockphoto.com/id/1810498034/photo/happy-snowman-holding-a-fir-branch-decorated-with-berries-candy-and-star-shaped-decoration-on.jpg?s=2048x2048&w=is&k=20&c=F4-K1yx60q2v8uL6o-JbgCMfOMIHlXMIshrbBhJqyhA=',
+      name: 'picture 1',
+      description: 'Snowman',
+    },
+    {
+      url: 'https://sleeklens.com/wp-content/uploads/2016/09/IMG_1613-copy.jpg',
+      name: 'picture 2',
+      description: 'Glass ball',
+    },
+    {
+      url: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/new-year-background-736885_1280.jpg',
+      name: 'picture 3',
+      description: 'Sunset',
+    },
+  ];
+
+  selectedImage: any = null;
+
+  selectImage(image: any){
+    this.selectedImage = image;
+  }
+
+}
