@@ -134,7 +134,6 @@ public class SemanticCheck {
                 }
             }
         }
-
         return !importsError.isEmpty();
     }
 

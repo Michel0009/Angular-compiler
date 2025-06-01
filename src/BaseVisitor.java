@@ -1054,10 +1054,6 @@ public class BaseVisitor extends AngularParserBaseVisitor {
                 }
             }
         }
-        Row row3 = new Row();
-        row3.setType("library");
-        row3.setValue(import1.getName());
-        symbolTable.getRows().add(row3);
 
         return import1;
     }
@@ -1102,6 +1098,10 @@ public class BaseVisitor extends AngularParserBaseVisitor {
         row1.setValue(componentBody.getIdentifier());
         symbolTable.getRows().add(row1);
 
+        Row row2 = new Row();
+        row2.setType("elementValue");
+        row2.setValue(componentBody.getStringValue());
+        symbolTable.getRows().add(row2);
 
         for (int i=0;i<componentBody.getIdentifierList().size(); i++){
             if (componentBody.getIdentifierList().get(i)!= null){
@@ -1110,6 +1110,10 @@ public class BaseVisitor extends AngularParserBaseVisitor {
                 row3.setValue(componentBody.getIdentifierList().get(i));
                 symbolTable.getRows().add(row3);
 
+                Row row4 = new Row();
+                row4.setType("elementValue");
+                row4.setValue(componentBody.getStringValueList().get(i));
+                symbolTable.getRows().add(row4);
             }
         }
 
@@ -1133,7 +1137,6 @@ public class BaseVisitor extends AngularParserBaseVisitor {
 
         return componentBody;
     }
-
 
     @Override
     public ComponentStyle visitComponentStyles(AngularParser.ComponentStylesContext ctx) {
@@ -1175,8 +1178,6 @@ public class BaseVisitor extends AngularParserBaseVisitor {
             row2.setValue(componentImport.getIdentifiers().get(i));
             symbolTable.getRows().add(row2);
         }
-
-
         return componentImport;
     }
 
